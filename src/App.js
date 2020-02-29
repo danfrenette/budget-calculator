@@ -53,12 +53,36 @@ class App extends React.Component {
     });
   };
 
+  renderTotal = () => {
+    return (
+      <Row>
+        <Col md="2">
+          <Label>Total</Label>
+        </Col>
+        <Col md="5">
+          <InputGroup>
+            <Input
+              className="form-control"
+              type="number"
+              value={0}
+              readOnly
+            />
+            <InputGroupAddon addonType="append">
+              <InputGroupText>%</InputGroupText>
+            </InputGroupAddon>
+          </InputGroup>
+        </Col>
+      </Row>
+    )
+  }
+
   render() {
     return (
       <div className="App">
         <Container>
           <Income/>
           { this.renderBuckets() }
+          { this.renderTotal() }
         </Container>
       </div>
     );
