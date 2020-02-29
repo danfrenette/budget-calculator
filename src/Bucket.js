@@ -20,7 +20,6 @@ const Bucket = ({name, percentage}) => {
           <Input
             className="form-control"
             type="number"
-            id="guilt-free-spending"
             min={0}
             max={100}
             defaultValue={ percentage }
