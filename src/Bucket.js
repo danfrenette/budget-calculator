@@ -9,15 +9,22 @@ import {
   Input
 } from 'reactstrap';
 
-const Bucket = ({name}) => {
+const Bucket = ({name, percentage}) => {
   return (
     <Row>
       <Col md="2">
-        <Label for="guilt-free-spending">{ name }</Label>
+        <Label>{ name }</Label>
       </Col>
       <Col md="5">
         <InputGroup>
-          <Input className="form-control" type="number" id="guilt-free-spending" placeholder="30" />
+          <Input
+            className="form-control"
+            type="number"
+            id="guilt-free-spending"
+            min={0}
+            max={100}
+            defaultValue={ percentage }
+          />
           <InputGroupAddon addonType="append">
             <InputGroupText>%</InputGroupText>
           </InputGroupAddon>
