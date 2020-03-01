@@ -9,7 +9,7 @@ import {
   Input
 } from 'reactstrap';
 
-const Bucket = ({name, percentage}) => {
+const Bucket = ({name, percentage, income}) => {
   return (
     <Row>
       <Col md="2">
@@ -30,7 +30,7 @@ const Bucket = ({name, percentage}) => {
         </InputGroup>
       </Col>
       <Col md="2">
-        <span>$0.00</span>
+        <span>{ income * (percentage / 100) }</span>
       </Col>
     </Row>
   )

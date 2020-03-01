@@ -12,32 +12,15 @@ import {
   Input
 } from 'reactstrap';
 
-const Income = () => {
-  return (
-    <Row>
-      <Col md="2">
-        <Label>Income</Label>
-      </Col>
-      <Col md="5">
-        <InputGroup>
-          <InputGroupAddon addonType="prepend">
-            <InputGroupText>$</InputGroupText>
-          </InputGroupAddon>
-          <Input
-            className="form-control"
-            type="number"
-            defaultValue={0}
-          />
-        </InputGroup>
-      </Col>
-      <Col md="2">
-        <span>$0.00</span>
-      </Col>
-    </Row>
-  )
-}
-
 class App extends React.Component {
+  state = {
+    income: 0,
+  }
+
+  updateIncome = e => {
+    this.setState({ income: e.target.value });
+  };
+
   renderBuckets = () => {
     const buckets = {
       "Fixed Costs": 50,
@@ -48,7 +31,12 @@ class App extends React.Component {
 
     return Object.entries(buckets).map(([bucketName, percentage], i) => { 
       return (
-        <Bucket key={i} name={bucketName} percentage={percentage}/>
+        <Bucket
+          key={i}
+          name={bucketName}
+          percentage={percentage}
+          income={this.state.income}
+        />
       )
     });
   };
@@ -80,7 +68,27 @@ class App extends React.Component {
     return (
       <div className="App">
         <Container>
-          <Income/>
+          <Row>
+            <Col md="2">
+              <Label>Income</Label>
+            </Col>
+            <Col md="5">
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">
+                  <InputGroupText>$</InputGroupText>
+                </InputGroupAddon>
+                <Input
+                  className="form-control"
+                  type="number"
+                  defaultValue={0}
+                  onChange={this.updateIncome}
+                />
+              </InputGroup>
+            </Col>
+            <Col md="2">
+              <span>{this.state.income}</span>
+            </Col>
+          </Row>
           { this.renderBuckets() }
           { this.renderTotal() }
         </Container>
