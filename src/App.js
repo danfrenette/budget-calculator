@@ -15,26 +15,34 @@ import {
 class App extends React.Component {
   state = {
     income: 0,
+    buckets: {
+      "Fixed Costs": 50,
+      Investments: 10,
+      Savings: 20,
+      "Guilt-Free Spending": 30,
+    }
   }
 
   updateIncome = e => {
     this.setState({ income: e.target.value });
   };
 
-  renderBuckets = () => {
-    const buckets = {
-      "Fixed Costs": 50,
-      Investments: 10,
-      Savings: 20,
-      "Guilt-Free Spending": 30,
-    };
+  percentUpdated = (bucketName, percentage) => {
+    let buckets = this.state.buckets;
+    buckets[bucketName] = percentage
+    this.setState(buckets)
+  }
 
-    return Object.entries(buckets).map(([bucketName, percentage], i) => { 
+  renderBuckets = () => {
+    const { buckets } = this.state
+
+    return Object.keys(buckets).map((bucketName, i) => {
       return (
         <Bucket
           key={i}
           name={bucketName}
-          percentage={percentage}
+          percentage={buckets[bucketName]}
+          percentUpdated={this.percentUpdated}
           income={this.state.income}
         />
       )
