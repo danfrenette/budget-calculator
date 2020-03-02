@@ -27,11 +27,11 @@ class Bucket extends React.Component {
     const { percentage } = this.state;
 
     return (
-      <Row>
+      <Row className="mt-2">
         <Col md="2">
           <Label>{ name }</Label>
         </Col>
-        <Col md="5">
+        <Col md={{size: 5, offset: 1}}>
           <InputGroup>
             <Input
               className="form-control"

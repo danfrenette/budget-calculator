@@ -19,7 +19,7 @@ class App extends React.Component {
       "Fixed Costs": 50,
       Investments: 10,
       Savings: 20,
-      "Guilt-Free Spending": 30,
+      "Guilt-Free Spending": 20,
     }
   }
 
@@ -55,11 +55,11 @@ class App extends React.Component {
     );
 
     return (
-      <Row>
+      <Row className="mt-2">
         <Col md="2">
           <Label>Total</Label>
         </Col>
-        <Col md="5">
+        <Col md={{size: 5, offset: 1}}>
           <InputGroup>
             <Input
               className="form-control"
@@ -80,12 +80,13 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <h2>IWT Budget Calculator</h2>
         <Container>
           <Row>
             <Col md="2">
               <Label>Income</Label>
             </Col>
-            <Col md="5">
+            <Col md={{size: 5, offset: 1}}>
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>$</InputGroupText>
