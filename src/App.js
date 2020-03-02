@@ -50,6 +50,10 @@ class App extends React.Component {
   };
 
   renderTotal = () => {
+    const total = Object.values(this.state.buckets).reduce(
+      (sum, currentValue) => Number(sum) + Number(currentValue)
+    );
+
     return (
       <Row>
         <Col md="2">
@@ -60,7 +64,8 @@ class App extends React.Component {
             <Input
               className="form-control"
               type="number"
-              value={0}
+              id="total"
+              value={total}
               readOnly
             />
             <InputGroupAddon addonType="append">
