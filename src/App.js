@@ -15,12 +15,12 @@ import {
 class App extends React.Component {
   state = {
     income: 0,
-    buckets: {
-      "Fixed Costs": 50,
-      Investments: 10,
-      Savings: 20,
-      "Guilt-Free Spending": 20,
-    }
+    buckets: [ 
+      { name: "Fixed Costs", percentage: 50 },
+      { name: "Investments", percentage: 10 },
+      { name: "Savings", percentage: 20 },
+      { name: "Guilt-Free Spending", percentage: 20 },
+    ]
   }
 
   updateIncome = e => {
@@ -29,29 +29,28 @@ class App extends React.Component {
 
   percentUpdated = (bucketName, percentage) => {
     let buckets = this.state.buckets;
-    buckets[bucketName] = percentage
+    buckets.find(bucket => bucket.name == bucketName).percentage = Number(percentage)
     this.setState(buckets)
   }
 
   renderBuckets = () => {
     const { buckets } = this.state
 
-    return Object.keys(buckets).map((bucketName, i) => {
-      return (
-        <Bucket
-          key={i}
-          name={bucketName}
-          percentage={buckets[bucketName]}
-          percentUpdated={this.percentUpdated}
-          income={this.state.income}
-        />
-      )
-    });
+    return buckets.map((bucket, i) => (
+      <Bucket
+        key={i}
+        name={bucket.name}
+        percentage={bucket.percentage}
+        percentUpdated={this.percentUpdated}
+        income={this.state.income}
+      />
+    ))
   };
 
   renderTotal = () => {
-    const total = Object.values(this.state.buckets).reduce(
-      (sum, currentValue) => Number(sum) + Number(currentValue)
+    const percentages = this.state.buckets.map(bucket => bucket.percentage)
+    const total = percentages.reduce(
+      (sum, currentValue) => sum + currentValue
     );
 
     return (
